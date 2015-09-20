@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Host Admin</title>
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <link rel="stylesheet" href="font-awesome-4.4.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header"><input id="search-host" name="keyword" type="text" placeholder="type to search hosts"/><button id="new-host">新建Host</button>
+      </div>
+      <div id="host-group">
+      </div>
+      <div class="modal-backdrop hide"></div>
+      <div class="selectIpModal modal hide">
+        <ul class="chooseIp">
+        </ul>
+      </div>
+      <div class="editHostModal modal">
+        <div><label>主机名</label> <input class="name" type="text"/></div>
+        <div><label>备注</label> <input class="note" type="text"/></div>
+        <div>
+          <label>IP列表</label>
+          <div class="host-list">
+            <ul>
+            </ul>
+            <span class="add">添加</span>
+          </div>
+        </div>
+        <div class="operation">
+          <button class="cancel">取消</button><button class="save">保存</button>
+        </div>
+      </div>
+    </div>
+    <script src='jquery-1.6.4.js'></script>
+    <script src="manager.js"></script>
+  </body>
+</html>

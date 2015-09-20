@@ -1,0 +1,183 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'microsoft yahei';
+}
+html {
+  background-color: #FFD;
+}
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  width: 440px;
+}
+
+#search-host {
+  margin: 10px 0;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  width: 186px;
+}
+
+#host-group {
+  font-size: 0;
+}
+
+.host {
+  position: relative;
+  display: inline-block;
+  /*border: 2px solid red;*/
+  /*margin: 8px 8px 8px 0;*/
+  padding: 5px;
+  width: 210px;
+  cursor: pointer;
+  /*height: 50px;*/
+  /*background: #DDD;*/
+  /*font-size: 12px;*/
+}
+
+.enabled.host {
+  color: #3c763d;
+}
+
+.host-name {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.host-name .note {
+  float: right;
+}
+
+.host-info {
+  border: 2px solid #DDD;
+  padding: 5px;
+  background: #EEE;
+  height: 100%;
+}
+
+.enabled .host-info {
+  border-color: #3c763d;
+  background-color: #dff0d8;
+}
+
+.current-ip {
+  font-size: 18px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #000;
+  opacity: 0.5;
+}
+
+.modal {
+  width: 250px;
+  padding: 20px;
+  background-color: #FFF;
+  z-index: 100;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  margin-left: -125px;
+  display: block;
+}
+
+.selectIpModal {
+}
+
+ul.chooseIp {
+  width: 160px;
+  margin: 0 auto;
+  list-style: none;
+  cursor: pointer;
+}
+
+ul.chooseIp li {
+  margin-top: -1px;
+  border: 1px solid #EEE;
+}
+
+ul.chooseIp li.enabled, ul.chooseIp li.enabled:hover {
+  background-color: #dff0d8;
+} 
+
+ul.chooseIp li:hover {
+  background-color: #EEE;
+} 
+
+.operations {
+  position: absolute;
+  bottom: 14px;
+  right: 10px;
+  font-size: 14px;
+  line-height: 14px;
+  list-style: none;
+}
+
+.operations li {
+  display: inline-block;
+  width: 14px;
+  text-align: center;
+}
+
+.operations li:hover {
+  background-color: #ccc;
+}
+
+.editHostModal label {
+  display: block;
+  width: 55px;
+  float: left;
+}
+
+.editHostModal .host-list {
+  float: left;
+}
+
+.editHostModal .host-list span {
+  float: right;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.editHostModal ul {
+  list-style: none;
+}
+
+.editHostModal .operation {
+  margin-top: 20px;
+  clear: both;
+  float: right
+}
+
+.editHostModal .operation button {
+  height: 22px;
+  width: 40px;
+  line-height: 22px;
+  margin-left: 10px;
+}
+
+.header {
+  padding: 5px;
+}
+
+.header button {
+  height: 34px;
+  line-height: 34px;
+  font-size: 16px;
+  width: 100px;
+  margin-left: 10px;
+}
+
+.hide {
+  display: none;
+}
