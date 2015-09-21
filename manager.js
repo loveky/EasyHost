@@ -172,6 +172,7 @@ var hostAdmin = {
     if (this.hosts.hasOwnProperty(hostname)) {
       this.hosts[hostname].delete();
       delete this.hosts[hostname];
+      eventCenter.trigger('hostChanged');
     }
   },
   init: function () {
@@ -294,6 +295,7 @@ $('#new-host').bind('click', function () {
 
   editHostService.edit(host, function (host) {
     hostAdmin.addHost(host);
+    eventCenter.trigger('hostChanged');
   });
 });
 
