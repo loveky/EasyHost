@@ -1,5 +1,5 @@
 var fs = require('fs');
-var hostsPath = './hosts';
+var hostsPath = 'C:\\Windows\\System32\\drivers\\etc\\hosts';
 var hostFileContent = String(fs.readFileSync(hostsPath));
 var lines = hostFileContent.split('\n');
 var data = {};
