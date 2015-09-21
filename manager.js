@@ -1,6 +1,6 @@
 var fs = require('fs');
-
-var hostFileContent = String(fs.readFileSync('./hosts'));
+var hostsPath = './hosts';
+var hostFileContent = String(fs.readFileSync(hostsPath));
 var lines = hostFileContent.split('\n');
 var data = {};
 var regexp = /^\s*(\#*)\s*([a-zA-Z\d\.\:\%]+)\s+(\S+)\s*(\#+\s*(.*?)\s*)?$/;
@@ -35,6 +35,8 @@ lines.forEach(function (line) {
     }
   }
 });
+
+var eventCenter = $({});
 
 function Host (config, $renderContainer) {
   $.extend(this, config);
@@ -86,6 +88,8 @@ Host.prototype.disable = function () {
   this.enabled = false;
   this.$el.removeClass('enabled');
   this.$el.find('.current-ip').text('Disabled');
+
+  eventCenter.trigger('hostChanged');
 };
 
 Host.prototype.enable = function () {
@@ -121,6 +125,7 @@ Host.prototype.selectHost = function (onSelectCallback) {
       self.$el.find('.current-ip').text($(this).text());
 
     closeModal();
+    eventCenter.trigger('hostChanged');
   });
 };
 
@@ -173,8 +178,6 @@ var hostAdmin = {
     var self = this;
     this.$container.delegate('.host', 'click', function () {
       self.hosts[$(this).data('name')].toggleEnableState();
-
-      console.log(self.toText());
     });
 
     this.$container.delegate('li.select', 'click', function (event) {
@@ -292,4 +295,8 @@ $('#new-host').bind('click', function () {
   editHostService.edit(host, function (host) {
     hostAdmin.addHost(host);
   });
+});
+
+eventCenter.bind('hostChanged', function () {
+  fs.writeFileSync(hostsPath, hostAdmin.toText());
 });
