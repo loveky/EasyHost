@@ -3,17 +3,16 @@ var fs = require('fs');
 var hostFileContent = String(fs.readFileSync('./hosts'));
 var lines = hostFileContent.split('\n');
 var data = {};
-var regexp = /^\s*(\#*)\s*([a-zA-Z\d\.\:\%]+)\s+(\S+)\s*(\#+\s*(.*))?$/;
+var regexp = /^\s*(\#*)\s*([a-zA-Z\d\.\:\%]+)\s+(\S+)\s*(\#+\s*(.*?)\s*)?$/;
 
 lines.forEach(function (line) {
-  var result = regexp.exec(line);
+  var result = line.match(regexp);
 
   if (result != null) {
     var name = result[3];
-    var note = result[5] || '';
+    var note = $.trim(result[5] || '');
     var ip = result[2];
     var enabled = result[1].length === 0;
-    
     if (!data.hasOwnProperty(result[3])) {
       data[name] = {
         name: name,
@@ -27,29 +26,15 @@ lines.forEach(function (line) {
       data[name].ipList.push(ip);
     }
 
+    if (data[name].note.length == 0 && note.length > 0) {
+      data[name].note = note;
+    }
+
     if (! data[name].enabled && enabled) {
       data[name].enabled = ip;
     }
   }
 });
-
-// var data = {
-//   'dev.jd.com': {
-//     note: "本地开发",
-//     enabled: false,
-//     ipList: ['127.0.0.1', '1.1.1.1', '3.3.3.3']
-//   },
-//   'list.jd.com': {
-//     note: "列表页",
-//     enabled: '172.11.11.112',
-//     ipList: ['172.11.11.112', '233.22.23.22', '55.55.333.22']
-//   },
-//   'misc.360buyimg.com': {
-//     note: "MISC",
-//     enabled: '999.33.33.33',
-//     ipList: ['11,22,33,33']
-//   }
-// };
 
 function Host (config, $renderContainer) {
   $.extend(this, config);
