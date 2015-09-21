@@ -10,7 +10,7 @@ html {
   position: relative;
   margin: 0 auto;
   padding: 20px;
-  width: 440px;
+  width: 460px;
 }
 
 #search-host {
@@ -24,6 +24,8 @@ html {
 
 #host-group {
   font-size: 0;
+  height: 580px;
+  overflow-y: auto;
 }
 
 .host {

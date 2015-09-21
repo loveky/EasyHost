@@ -302,3 +302,25 @@ $('#new-host').bind('click', function () {
 eventCenter.bind('hostChanged', function () {
   fs.writeFileSync(hostsPath, hostAdmin.toText());
 });
+
+
+var remote = require('remote');
+var Menu = remote.require('menu');
+
+var menu = new Menu();
+
+var template = [
+  {
+    label: '关于',
+    role: 'about',
+    submenu: [
+      {
+        label: '关于EasyHost',
+        click: function() { require('shell').openExternal('http://electron.atom.io') }
+      }
+    ]
+  },
+];
+
+menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
