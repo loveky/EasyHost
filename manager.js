@@ -197,6 +197,8 @@ var hostAdmin = {
         }
         host.render(self.$container);
       });
+
+      eventCenter.trigger('hostChanged');
     });
 
     this.$container.delegate('li.delete', 'click', function (event) {
