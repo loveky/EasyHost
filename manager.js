@@ -1,4 +1,5 @@
 var fs = require('fs');
+var $ = require('jquery-2.1.4.min');
 var hostsPath = 'C:\\Windows\\System32\\drivers\\etc\\hosts';
 var hostFileContent = String(fs.readFileSync(hostsPath));
 var lines = hostFileContent.split('\n');
@@ -196,14 +197,20 @@ var hostAdmin = {
           delete self.hosts[originName];
         }
         host.render(self.$container);
+        eventCenter.trigger('hostChanged');
       });
 
-      eventCenter.trigger('hostChanged');
     });
 
     this.$container.delegate('li.delete', 'click', function (event) {
       event.stopPropagation();
       self.removeHost($(this).closest('.host').data('name'));
+    });
+
+    this.$container.delegate('.host', 'contextmenu', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      console.log(1);
     });
   },
   filter: function (keyword) {
