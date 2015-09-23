@@ -178,7 +178,7 @@ Host.prototype.toText = function () {
     text.push(ensureLength((ip == self.enabled ? '' : '# ') + ip, 20) + ensureLength(self.name, 30) + (self.note ? '# ' + self.note : ''));
   });
   
-  return text.join('\n');
+  return text.join('\r\n');
 };
 
 function showContextMenu (host) {
@@ -275,7 +275,7 @@ var hostAdmin = {
       text.push(host.toText());
     });
 
-    return text.join('\n\n');
+    return text.join('\r\n\r\n');
   }
 };
 
@@ -364,15 +364,23 @@ var menu = new Menu();
 
 var template = [
   {
+    label: '操作',
+    submenu: [
+      {
+        label: '打开Hosts文件',
+        click: function() { require('shell').openItem(hostsPath) }
+      }
+    ]
+  },
+  {
     label: '关于',
-    role: 'about',
     submenu: [
       {
         label: '关于EasyHost',
         click: function() { require('shell').openExternal('http://electron.atom.io') }
       }
     ]
-  },
+  }
 ];
 
 menu = Menu.buildFromTemplate(template);
