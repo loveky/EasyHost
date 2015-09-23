@@ -1,5 +1,5 @@
 var fs = require('fs');
-var $ = require('jquery-2.1.4.min');
+var $ = require('./jquery-2.1.4.min');
 
 var remote = require('remote');
 var Menu = remote.require('menu');
