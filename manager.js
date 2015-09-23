@@ -385,3 +385,39 @@ var template = [
 
 menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
+
+$(document).on('paste', function (event) {
+  event.preventDefault();
+
+  var result;
+  var text = event.originalEvent.clipboardData.getData('text');
+  var lines = text.split('\n');
+  lines.forEach(function (line) {
+    result = line.match(regexp);
+
+    if (result) {
+      var name = result[3];
+      var note = $.trim(result[5] || '');
+      var ip = result[2];
+      var enabled = result[1].length === 0;
+
+      if (hostAdmin.hosts.hasOwnProperty(name)) {
+        if (hostAdmin.hosts[name].ipList.indexOf(ip) == -1) {
+          hostAdmin.hosts[name].ipList.push(ip);
+        }
+
+        if (enabled) {
+          hostAdmin.hosts[name].use(ip);
+        }
+      }
+      else {
+        hostAdmin.addHost({
+          name: name,
+          note: note,
+          ipList: [ip],
+          enabled: enabled ? ip : false
+        });
+      }
+    }
+  });
+});
