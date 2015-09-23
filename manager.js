@@ -1,5 +1,12 @@
 var fs = require('fs');
 var $ = require('jquery-2.1.4.min');
+
+var remote = require('remote');
+var Menu = remote.require('menu');
+var MenuItem = remote.require('menu-item');
+
+var clipboard = require('clipboard');
+
 var hostsPath = 'C:\\Windows\\System32\\drivers\\etc\\hosts';
 var hostFileContent = String(fs.readFileSync(hostsPath));
 var lines = hostFileContent.split('\n');
@@ -59,7 +66,6 @@ Host.prototype.render = function ($renderContainer) {
         +         (this.enabled || 'Disabled')
         + '    </div>'
         + '    <ul class="operations">'
-        + '      <li class="select"><i class="fa fa-ellipsis-v"></i></li>'
         + '      <li class="edit"><i class="fa fa-gear"></i></li>'
         + '      <li class="delete"><i class="fa fa-trash"></i></li>'
         + '    </ul>'
@@ -130,6 +136,18 @@ Host.prototype.selectHost = function (onSelectCallback) {
   });
 };
 
+Host.prototype.use = function (ip) {
+  if (this.ipList.indexOf(ip) == -1 || this.enabled === ip) {
+    return;
+  }
+
+  this.$el.addClass('enabled');
+  this.$el.find('.current-ip').text(ip);
+  this.enabled = ip;
+
+  eventCenter.trigger('hostChanged');
+}
+
 Host.prototype.delete = function () {
   this.$el.remove();
 };
@@ -163,6 +181,37 @@ Host.prototype.toText = function () {
   return text.join('\n');
 };
 
+function showContextMenu (host) {
+  var getCopyCurrentConfigHandler = function (host) {
+    return function () {
+      clipboard.writeText(host.name + ' ' + host.enabled + ' #' + host.note);
+    }
+  }
+
+  var getCopyAllConfigHandler = function (host) {
+    return function () {
+      clipboard.writeText(host.toText());
+    }
+  }
+
+  var template = [];
+  var menu = new Menu();
+  template.push({label: '复制当前配置', click: getCopyCurrentConfigHandler(host), enabled: !!host.enabled});
+  template.push({label: '复制所有配置', click: getCopyAllConfigHandler(host)});
+
+  template.push({type: 'separator'});
+
+  host.ipList.forEach(function (ip) {
+    template.push({label: '启用 ' + ip, click: function () {host.use(ip)}, enabled: ip !== host.enabled});
+  });
+
+  template.forEach(function (item) {
+    menu.append(new MenuItem(item));
+  });
+
+  menu.popup(remote.getCurrentWindow());
+}
+
 var hostAdmin = {
   $container: $('#host-group'),
   hosts: {},
@@ -180,11 +229,6 @@ var hostAdmin = {
     var self = this;
     this.$container.delegate('.host', 'click', function () {
       self.hosts[$(this).data('name')].toggleEnableState();
-    });
-
-    this.$container.delegate('li.select', 'click', function (event) {
-      event.stopPropagation();
-      self.hosts[$(this).closest('.host').data('name')].selectHost();
     });
 
     this.$container.delegate('li.edit', 'click', function (event) {
@@ -210,7 +254,8 @@ var hostAdmin = {
     this.$container.delegate('.host', 'contextmenu', function (event) {
       event.preventDefault();
       event.stopPropagation();
-      console.log(1);
+ 
+      showContextMenu(self.hosts[$(this).closest('.host').data('name')]);
     });
   },
   filter: function (keyword) {
@@ -313,8 +358,7 @@ eventCenter.bind('hostChanged', function () {
 });
 
 
-var remote = require('remote');
-var Menu = remote.require('menu');
+
 
 var menu = new Menu();
 
