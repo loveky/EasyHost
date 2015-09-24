@@ -5,6 +5,9 @@
   "devDependencies": {
     "electron-prebuilt": "^0.33.0"
   },
+  "scripts": {
+  	"dev": "electron ./app"
+  },
   "dependencies": {
     "electron-builder": "^2.0.0",
     "electron-packager": "^5.1.0"
