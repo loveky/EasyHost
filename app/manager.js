@@ -2,6 +2,8 @@ var fs = require('fs');
 var $ = require('./jquery-2.1.4.min');
 
 var remote = require('remote');
+
+var remote = require('remote');
 var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
 
@@ -420,4 +422,12 @@ $(document).on('paste', function (event) {
       }
     }
   });
+});
+
+$(document).bind("keyup", function (event) {
+  if (event.keyCode == 123) {
+    var currentWindow = remote.getCurrentWindow();
+
+    currentWindow.toggleDevTools();
+  }
 });
