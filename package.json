@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "main": "main.js",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.0"
+    "electron-prebuilt": "^0.33.0",
+    "electron-builder": "^2.0.0",
+    "electron-packager": "^5.1.0"
   },
   "scripts": {
   	"dev": "electron ./app",
@@ -13,9 +15,5 @@
   	"build": "npm run clean && electron-packager ./app \"EasyHost\" --out=dist/win32 --platform=win32 --arch=x64 --version=0.33.0 --icon=assets/win32/icon.ico",
 
   	"pack": "npm run build && electron-builder \"dist/win32/EasyHost-win32-x64\" --platform=win --out=\"dist/win32\" --config=packager.json"
-  },
-  "dependencies": {
-    "electron-builder": "^2.0.0",
-    "electron-packager": "^5.1.0"
   }
 }
