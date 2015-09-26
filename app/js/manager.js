@@ -218,6 +218,10 @@ var hostAdmin = {
     this.hosts[host.name] = new Host(host, this.$container);
   },
   removeHost: function (hostname) {
+    if (!confirm("确定要删除关于" + hostname  + "的host信息吗?")) {
+      return;
+    }
+
     if (this.hosts.hasOwnProperty(hostname)) {
       this.hosts[hostname].delete();
       delete this.hosts[hostname];
