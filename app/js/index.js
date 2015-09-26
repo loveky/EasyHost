@@ -6,6 +6,7 @@ var remote = require('remote');
 var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
 var clipboard = require('clipboard');
+var BrowserWindow = remote.require('browser-window');
 
 // 第三方模块
 var $ = require('./lib/jquery-2.1.4.min');
@@ -39,14 +40,17 @@ var template = [
     submenu: [
       {
         label: '关于EasyHost',
-        click: function() { require('shell').openExternal('http://electron.atom.io') }
+        click: function() {
+          var aboutWindow = new BrowserWindow({width: 400, height: 400, title: '关于EasyHost', 'always-on-top': true});
+          aboutWindow.loadUrl('file://' + __dirname + '/about.html');
+        }
       }
     ]
   }
 ];
 
 menu = Menu.buildFromTemplate(template);
-Menu.setApplicationMenu(menu);
+remote.getCurrentWindow().setMenu(menu);
 
 // 触发hostChanged事件时将配置写入硬盘
 eventCenter.bind('hostChanged', function () {
