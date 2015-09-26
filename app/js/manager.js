@@ -22,25 +22,7 @@ var hostsFile = require('./js/hostsFile');
 hostAdmin.init();
 hostAdmin.readConfigFromDisk();
 
-$('#search-host').bind('keyup', function () {
-  var keyword = $(this).val();
-
-  hostAdmin.filter(keyword);
-});
-
-$('#new-host').bind('click', function () {
-  var host = {ipList: []};
-
-  editHostService.edit(host, function (host) {
-    hostAdmin.addHost(host);
-    eventCenter.trigger('hostChanged');
-  });
-});
-
-eventCenter.bind('hostChanged', function () {
-  hostAdmin.saveToDisk();
-});
-
+// 初始化程序菜单
 var menu = new Menu();
 var template = [
   {
@@ -66,44 +48,39 @@ var template = [
 menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
 
+// 触发hostChanged事件时将配置写入硬盘
+eventCenter.bind('hostChanged', function () {
+  hostAdmin.saveToDisk();
+});
+
+// 搜索Host
+$('#search-host').bind('keyup', function () {
+  var keyword = $(this).val();
+
+  hostAdmin.filter(keyword);
+});
+
+// 添加新Host
+$('#new-host').bind('click', function () {
+  var host = {ipList: []};
+
+  editHostService.edit(host, function (host) {
+    hostAdmin.addHost(host);
+    eventCenter.trigger('hostChanged');
+  });
+});
+
+// 粘贴文本时更新配置
 $(document).on('paste', function (event) {
   event.preventDefault();
 
-  var result;
   var text = event.originalEvent.clipboardData.getData('text');
-  var lines = text.split('\n');
-  lines.forEach(function (line) {
-    result = line.match(regexp);
-
-    if (result) {
-      var name = result[3];
-      var note = $.trim(result[5] || '');
-      var ip = result[2];
-      var enabled = result[1].length === 0;
-
-      if (hostAdmin.hosts.hasOwnProperty(name)) {
-        if (hostAdmin.hosts[name].ipList.indexOf(ip) == -1) {
-          hostAdmin.hosts[name].ipList.push(ip);
-        }
-
-        if (enabled) {
-          hostAdmin.hosts[name].use(ip);
-        }
-      }
-      else {
-        hostAdmin.addHost({
-          name: name,
-          note: note,
-          ipList: [ip],
-          enabled: enabled ? ip : false
-        });
-      }
-    }
-  });
+  hostAdmin.mergeConfig(text);
 
   eventCenter.trigger('hostChanged');
 });
 
+// F12打开开发者工具
 $(document).bind("keyup", function (event) {
   if (event.keyCode == 123) {
     var currentWindow = remote.getCurrentWindow();

@@ -151,6 +151,39 @@ var hostAdmin = {
   },
   saveToDisk: function () {
     hostsFile.writeToDisk(this.toText());
+  },
+  mergeConfig: function (text) {
+    var self = this;
+    var result;
+    var lines = text.split('\n');
+    lines.forEach(function (line) {
+      result = line.match(regexp);
+
+      if (result) {
+        var name = result[3];
+        var note = $.trim(result[5] || '');
+        var ip = result[2];
+        var enabled = result[1].length === 0;
+
+        if (self.hosts.hasOwnProperty(name)) {
+          if (self.hosts[name].ipList.indexOf(ip) == -1) {
+            self.hosts[name].ipList.push(ip);
+          }
+
+          if (enabled) {
+            self.hosts[name].use(ip);
+          }
+        }
+        else {
+          self.addHost({
+            name: name,
+            note: note,
+            ipList: [ip],
+            enabled: enabled ? ip : false
+          });
+        }
+      }
+    });
   }
 };
 
