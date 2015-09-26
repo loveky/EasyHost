@@ -65,8 +65,8 @@ Host.prototype.render = function ($renderContainer) {
         +         (this.enabled || 'Disabled')
         + '    </div>'
         + '    <ul class="operations">'
-        + '      <li class="edit"><i class="fa fa-gear"></i></li>'
-        + '      <li class="delete"><i class="fa fa-trash"></i></li>'
+        + '      <li class="edit"><i class="icon icon-edit"></i></li>'
+        + '      <li class="delete"><i class="icon icon-delete"></i></li>'
         + '    </ul>'
         + '  </div>'
         + '</div>';

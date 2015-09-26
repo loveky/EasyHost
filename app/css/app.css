@@ -184,3 +184,17 @@ ul.chooseIp li:hover {
 .hide {
   display: none;
 }
+
+.icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-edit {
+  background: url(../images/gear_000000_14.png);
+}
+
+.icon-delete {
+  background: url(../images/trash_000000_14.png);
+}
