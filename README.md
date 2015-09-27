@@ -1,6 +1,9 @@
 # EasyHost
 一个帮你轻松管理hosts文件的小工具。基于[Electron](http://electron.atom.io/)构建。
 
+### 下载安装
+[点此](http://pan.baidu.com/s/1kTrOTWr)下载Windows安装程序。
+
 ### 本地开发
 *注：如果需要生成Windows安装文件，请先安装[nullsoft scriptable installer](http://nsis.sourceforge.net/Download)*
 
