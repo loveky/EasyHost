@@ -76,6 +76,10 @@ $('#new-host').bind('click', function () {
 
 // 粘贴文本时更新配置
 $(document).on('paste', function (event) {
+  if ($(event.target).is('input')) {
+    return;
+  }
+
   event.preventDefault();
 
   var text = event.originalEvent.clipboardData.getData('text');
