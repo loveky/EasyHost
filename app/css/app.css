@@ -152,6 +152,14 @@ ul.chooseIp li:hover {
   cursor: pointer;
 }
 
+.editHostModal .icon {
+  vertical-align: bottom;
+}
+
+.editHostModal .icon:hover {
+  background-color: #ccc;
+}
+
 .editHostModal ul {
   list-style: none;
 }
@@ -186,7 +194,7 @@ ul.chooseIp li:hover {
 }
 
 .icon {
-  display: block;
+  display: inline-block;
   width: 14px;
   height: 14px;
 }

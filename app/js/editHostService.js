@@ -5,7 +5,11 @@ var $el = $('.editHostModal');
 $el.hide();
 
 $el.delegate('.add', 'click', function () {
-  $el.find('ul').append('<li><input type="text"/></li>');
+  $el.find('ul').append('<li><input type="text"/><i class="icon icon-delete"></i></li>');
+});
+
+$el.delegate('.icon-delete', 'click', function () {
+  $(this).parent().remove();
 });
 
 $el.delegate('.cancel', 'click', function () {
@@ -23,7 +27,7 @@ function edit (host, onSaveCallback) {
   $el.find('ul').empty();
 
   host.ipList.forEach(function (ip) {
-    $el.find('ul').append('<li><input type="text" value="' + ip + '" /></li>')
+    $el.find('ul').append('<li><input type="text" value="' + ip + '" /><i class="icon icon-delete"></i></li>')
   });
 
   $('.modal-backdrop').show();
