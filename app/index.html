@@ -7,7 +7,9 @@
   </head>
   <body>
     <div class="container">
-      <div class="header"><input id="search-host" name="keyword" type="text" placeholder="type to search hosts"/><button id="new-host">新建Host</button>
+      <div class="header">
+      <button id="new-host">新建Host</button>
+      <input id="search-host" name="keyword" type="text" placeholder="type to search hosts"/>
       </div>
       <div id="host-group">
       </div>
@@ -17,9 +19,9 @@
         </ul>
       </div>
       <div class="editHostModal modal">
-        <div><label>主机名</label> <input class="name" type="text"/></div>
-        <div><label>备注</label> <input class="note" type="text"/></div>
-        <div>
+        <div class="input"><label>主机名</label> <input class="name" type="text"/></div>
+        <div class="input"><label>备注</label> <input class="note" type="text"/></div>
+        <div class="list">
           <label>IP列表</label>
           <div class="host-list">
             <ul>
