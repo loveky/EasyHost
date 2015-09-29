@@ -226,6 +226,14 @@ html {
   cursor: pointer;
 }
 
+.editHostModal .icon {
+  vertical-align: bottom;
+}
+
+.editHostModal .icon:hover {
+  background-color: #ccc;
+}
+
 .editHostModal ul {
   list-style: none;
 }
@@ -275,7 +283,6 @@ html {
 .hide {
   display: none;
 }
-
 
 .iconfont {
   font-family:"iconfont" !important;
