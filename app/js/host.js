@@ -8,18 +8,17 @@ Host.prototype.render = function ($renderContainer) {
   var originEl
   var html = ''
         + '<div data-name="' + this.name + '" class="host ' + (this.enabled ? 'enabled' : '') + '">'
+        + '  <div class="host-status iconfont icon-duihao"></div>'
         + '  <div class="host-info">'
-        + '    <div class="host-name">'
-        + '      <span>' + this.name + '</span>'
-        + '      <span class="note">' + this.note + '</span>'
-        + '    </div>'
-        + '    <div class="current-ip">'
-        +         (this.enabled || 'Disabled')
-        + '    </div>'
         + '    <ul class="operations">'
         + '      <li class="edit"><i class="icon icon-edit"></i></li>'
         + '      <li class="delete"><i class="icon icon-delete"></i></li>'
         + '    </ul>'
+        + '    <div class="host-name">' + this.name + '</div>'
+        + '    <div class="current-ip">'
+        +         (this.enabled || 'Disabled')
+        + '    </div>'
+        + '    <div class="host-note">' + this.note + '</div>'
         + '  </div>'
         + '</div>';
   if (this.$el) {

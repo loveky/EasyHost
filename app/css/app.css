@@ -4,13 +4,13 @@
   font-family: 'microsoft yahei';
 }
 html {
-  background-color: #FFD;
+  background-color: #fff;
 }
 .container {
   position: relative;
   margin: 0 auto;
   padding: 20px;
-  width: 460px;
+  width: 600px;
 }
 
 #search-host {
@@ -28,7 +28,6 @@ html {
 
 #host-group {
   font-size: 0;
-  width: 460px;
   height: 580px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -37,43 +36,74 @@ html {
 .host {
   position: relative;
   display: inline-block;
-  /*border: 2px solid red;*/
-  /*margin: 8px 8px 8px 0;*/
   padding: 5px;
-  width: 210px;
+  margin: 0 5px 10px;
+  width: 280px;
   cursor: pointer;
-  /*height: 50px;*/
-  /*background: #DDD;*/
-  /*font-size: 12px;*/
+  background: #dbdfe7;
 }
 
-.enabled.host {
-  color: #3c763d;
+.host:hover,
+.host.enabled {
+  padding: 4px;
+  border: 1px solid #32ab32;
+  background: rgba(3,166,1,.4);
+}
+
+.host:hover .operations,
+.host.enabled .operations {
+  top: 15px;
+  right: 9px;
+}
+
+.host.enabled .current-ip {
+  /*color: #ea664f;*/
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Arial';
+}
+
+.host-name,
+.host-note,
+.current-ip {
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
 }
 
 .host-name {
-  font-size: 14px;
-  margin-bottom: 10px;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.host-name .note {
-  float: right;
+.host-status {
+  margin: 7px 5px;
+}
+
+.host-status,
+.host-info {
+  float: left;
 }
 
 .host-info {
-  border: 2px solid #DDD;
-  padding: 5px;
-  background: #EEE;
-  height: 100%;
+  padding: 5px 10px 5px 5px;
+  overflow: hidden;
 }
 
-.enabled .host-info {
-  border-color: #3c763d;
-  background-color: #dff0d8;
+.host-note {
+  float: right;
+  width: 75px;
+  text-align: right;
 }
 
 .current-ip {
-  font-size: 18px;
+  float: left;
+  width: 155px;
+}
+
+.enabled .host-info {
 }
 
 .modal-backdrop {
@@ -103,49 +133,42 @@ html {
   padding: 30px;
 }
 
-ul.chooseIp {
+.chooseIp {
   width: 160px;
   margin: 0 auto;
   list-style: none;
   cursor: pointer;
 }
 
-ul.chooseIp li {
-  margin-bottom: 5px;
+.chooseIp li {
   padding: 5px;
+  margin-bottom: 10px;
+  background: #dbdfe7;
 }
 
-ul.chooseIp li.enabled, ul.chooseIp li:hover {
-  background-color: #dff0d8;
-  border: 1px solid #3c763d;
-  color: #3c763d;
-} 
-
-ul.chooseIp li {
-  background-color: #EEE;
-  border: 1px solid #ddd;
-} 
+.chooseIp li:hover,
+.chooseIp li.enabled {
+  padding: 4px;
+  border: 1px solid #32ab32;
+  background: rgba(3,166,1,.4);
+}
+.chooseIp li:hover .icon-duihao:before,
+.chooseIp li.enabled .icon-duihao:before {
+  color: #ee3769;
+}
 
 .operations {
   position: absolute;
-  bottom: 14px;
+  top: 16px;
   right: 10px;
-  font-size: 14px;
-  line-height: 14px;
   list-style: none;
 }
 
 .operations li {
   display: inline-block;
-  width: 14px;
+  width: 20px;
+  height: 20px;
   text-align: center;
-}
-
-.operations li:hover {
-  background-color: #ccc;
-}
-
-.editHostModal {
 }
 
 .editHostModal .input,
@@ -238,7 +261,8 @@ ul.chooseIp li {
 }
 
 .header button {
-  padding: 10px 12px;
+  margin-top: -1px;
+  padding: 10px 12px 11px;
   background: #18b6e4;
   border: 1px solid #18b6e4;
   border-radius: 4px;
@@ -252,16 +276,15 @@ ul.chooseIp li {
   display: none;
 }
 
-.icon {
-  display: block;
-  width: 14px;
-  height: 14px;
-}
 
-.icon-edit {
-  background: url(../images/gear_000000_14.png);
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-.icon-delete {
-  background: url(../images/trash_000000_14.png);
-}
+.icon-duihao:before { content: "\e60b";font-size:24px;color: #999; }
+.host.enabled .icon-duihao:before,.host:hover .icon-duihao:before {color: #f25561}
+.icon-5:before { content: "\e604";font-size:16px;color: #5a5a5a; }
+.icon-lajitong:before { content: "\e899";font-size:16px;color: #5a5a5a; }
