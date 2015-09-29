@@ -10,7 +10,7 @@ var Host = require('./host');
 function showContextMenu (host) {
   var getCopyCurrentConfigHandler = function (host) {
     return function () {
-      clipboard.writeText(host.name + ' ' + host.enabled + ' #' + host.note);
+      clipboard.writeText(host.enabled + ' ' + host.name + ' #' + host.note);
     }
   }
 
