@@ -14,17 +14,23 @@ html {
 }
 
 #search-host {
-  margin: 10px 0;
-  padding: 0 10px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 16px;
-  width: 186px;
+  padding: 5px 10px;
+  width: 200px;
+  height: 28px;
+  line-height: 28px;
+  border: none 0;
+  color: #565a6b;
+  font-size: 14px;
+  border: 1px solid #dbdfe7;
+  border-radius: 5px;
+  background: #fff;
 }
 
 #host-group {
   font-size: 0;
+  width: 460px;
   height: 580px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -82,18 +88,19 @@ html {
 }
 
 .modal {
-  width: 250px;
-  padding: 20px;
+  padding-top: 30px;
   background-color: #FFF;
   z-index: 100;
   position: absolute;
   top: 50px;
   left: 50%;
-  margin-left: -125px;
-  display: block;
+  margin-left: -150px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .selectIpModal {
+  padding: 30px;
 }
 
 ul.chooseIp {
@@ -104,16 +111,19 @@ ul.chooseIp {
 }
 
 ul.chooseIp li {
-  margin-top: -1px;
-  border: 1px solid #EEE;
+  margin-bottom: 5px;
+  padding: 5px;
 }
 
-ul.chooseIp li.enabled, ul.chooseIp li.enabled:hover {
+ul.chooseIp li.enabled, ul.chooseIp li:hover {
   background-color: #dff0d8;
+  border: 1px solid #3c763d;
+  color: #3c763d;
 } 
 
-ul.chooseIp li:hover {
+ul.chooseIp li {
   background-color: #EEE;
+  border: 1px solid #ddd;
 } 
 
 .operations {
@@ -135,10 +145,51 @@ ul.chooseIp li:hover {
   background-color: #ccc;
 }
 
+.editHostModal {
+}
+
+.editHostModal .input,
+.editHostModal .list {
+  padding: 0 55px 0 30px;
+}
+
+.editHostModal .input {
+  margin-bottom: 10px;
+  height: 40px;
+}
+
 .editHostModal label {
   display: block;
-  width: 55px;
   float: left;
+  padding: 0 15px;
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+  color: #565a6b;
+  font-weight: 700;
+}
+
+.editHostModal input {
+  padding: 5px 10px;
+  width: 200px;
+  height: 28px;
+  line-height: 28px;
+  border: none 0;
+  color: #565a6b;
+  font-size: 14px;
+  border: 1px solid #dbdfe7;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.editHostModal .list {
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.editHostModal .list input {
+  margin-bottom: 10px;
 }
 
 .editHostModal .host-list {
@@ -157,28 +208,44 @@ ul.chooseIp li:hover {
 }
 
 .editHostModal .operation {
-  margin-top: 20px;
-  clear: both;
-  float: right
+  padding: 20px 0;
+  text-align: center;
+  background: #565a6b;
 }
 
 .editHostModal .operation button {
-  height: 22px;
-  width: 40px;
-  line-height: 22px;
-  margin-left: 10px;
+  padding: 6px 12px;
+  background: #18b6e4;
+  border: 1px solid #18b6e4;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #fff;
+}
+
+.editHostModal .operation .cancel {
+  margin-right: 20px;
+  background: #e6e6e6;
+  border-color: #adadad;
+  color: #333;
 }
 
 .header {
-  padding: 5px;
+  padding: 5px 5px 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #62798f;
 }
 
 .header button {
-  height: 34px;
-  line-height: 34px;
-  font-size: 16px;
-  width: 100px;
-  margin-left: 10px;
+  padding: 10px 12px;
+  background: #18b6e4;
+  border: 1px solid #18b6e4;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #fff;
 }
 
 .hide {
