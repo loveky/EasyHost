@@ -93,6 +93,7 @@ var hostAdmin = {
     Object.keys(this.hosts).forEach(function (name) {
       if (name.indexOf(keyword) !== -1) {
         self.hosts[name].show();
+        self.hosts[name].highlightName(keyword);
       }
       else {
         self.hosts[name].hide();

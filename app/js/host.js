@@ -10,7 +10,7 @@ Host.prototype.render = function ($renderContainer) {
         + '<div data-name="' + this.name + '" class="host ' + (this.enabled ? 'enabled' : '') + '">'
         + '  <div class="host-info">'
         + '    <div class="host-name">'
-        + '      <span>' + this.name + '</span>'
+        + '      <span class="name">' + this.name + '</span>'
         + '      <span class="note">' + this.note + '</span>'
         + '    </div>'
         + '    <div class="current-ip">'
@@ -131,5 +131,10 @@ Host.prototype.toText = function () {
   
   return text.join('\r\n');
 };
+
+Host.prototype.highlightName = function (keyword) {
+  var $span = this.$el.find('.name');
+  $span.html($span.text().replace(keyword, '<span class="search-matched">' + keyword + '</span>'))
+}
 
 module.exports = Host;
