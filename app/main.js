@@ -2,6 +2,7 @@ var app = require('app');
 var BrowserWindow = require('browser-window');
 var crashReporter = require('crash-reporter');
 var ipc = require('ipc');
+var exec = require('child_process').exec;
 
 var mainWindow = null;
 
@@ -17,4 +18,13 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+});
+
+ipc.on('flush-system-cache', function () {
+  exec('ipconfig /flushdns', function(error, stdout, stderr) {});
+});
+
+ipc.on('flush-browser-cache', function () {
+  var flushBrowerCacheWindow = new BrowserWindow({width: 450, height: 500, title: '清空浏览器缓存'});
+  flushBrowerCacheWindow.loadUrl('file://' + __dirname + '/flush_browser_cache.html');
 });

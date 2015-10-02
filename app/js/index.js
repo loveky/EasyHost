@@ -7,6 +7,7 @@ var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
 var clipboard = require('clipboard');
 var BrowserWindow = remote.require('browser-window');
+var ipc = require('ipc');
 
 // 第三方模块
 var $ = require('./lib/jquery-2.1.4.min');
@@ -32,6 +33,21 @@ var template = [
       {
         label: '打开Hosts文件',
         click: function() { hostsFile.open(); }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '清空系统缓存',
+        click: function () {
+          ipc.send('flush-system-cache');
+        }
+      },
+      {
+        label: '清空浏览器缓存',
+        click: function () {
+          ipc.send('flush-browser-cache');
+        }
       }
     ]
   },

@@ -1,5 +1,6 @@
 var Menu = remote.require('menu');
 var MenuItem = remote.require('menu-item');
+var clipboard = require('clipboard');
 
 var $ = require('../lib/jquery-2.1.4.min');
 
