@@ -1,6 +1,7 @@
 var app = require('app');
 var BrowserWindow = require('browser-window');
 var crashReporter = require('crash-reporter');
+var ipc = require('ipc');
 
 var mainWindow = null;
 

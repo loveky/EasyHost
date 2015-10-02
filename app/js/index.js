@@ -41,7 +41,7 @@ var template = [
       {
         label: '关于EasyHost',
         click: function() {
-          var aboutWindow = new BrowserWindow({width: 400, height: 400, title: '关于EasyHost', 'always-on-top': true});
+          var aboutWindow = new BrowserWindow({width: 400, height: 400, title: '关于EasyHost', 'use-content-size': true});
           aboutWindow.loadUrl('file://' + __dirname + '/about.html');
         }
       }
