@@ -9,7 +9,7 @@
 
 首先clone本仓库，并安装npm依赖
 ```shell
-git clone https:///github.com/loveky/EasyHost.git
+git clone https://github.com/loveky/EasyHost.git
 cd EasyHost
 npm install
 ```
