@@ -1,4 +1,6 @@
 img {
   display: block;
   margin: 0 auto;
+  border-radius:20px;
+  box-shadow: 10px 10px 5px #ccc;
 }
