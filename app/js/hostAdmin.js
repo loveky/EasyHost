@@ -8,6 +8,7 @@ var hostsFile = require('./hostsFile');
 var editHostService = require('./editHostService');
 var Host = require('./host');
 var settings = require('./settings');
+var eventCenter = require('./eventCenter');
 
 function showContextMenu (host) {
   var getCopyCurrentConfigHandler = function (host) {
@@ -112,10 +113,10 @@ var hostAdmin = {
     });
 
     if (this.bypassList.length > 0) {    
-      text.push('###############################################\r\n'
-              + '#         以下host目前被EasyHost忽略\r\n'
-              + '# 如需在EasyHost显示以下host，请编辑bypass列表\r\n'
-              + '###############################################\r\n');
+      text.push('#########################################################\r\n'
+              + '#             以下host目前被EasyHost忽略\r\n'
+              + '# 如需在EasyHost显示以下host，请在EasyHost中编辑过滤条件\r\n'
+              + '#########################################################\r\n');
 
       text.push(this.bypassList.join('\r\n'));
     }
@@ -128,6 +129,11 @@ var hostAdmin = {
     var lines = hostFileContent.split('\n');
     var config = {};
     var bypassRegexps = settings.get('bypassRegexps', []);
+
+    Object.keys(self.hosts).forEach(function (name) {
+      self.hosts[name].delete();
+      delete self.hosts[name];
+    });
 
     self.bypassRegexps = [];
 
@@ -224,5 +230,9 @@ var hostAdmin = {
     });
   }
 };
+
+eventCenter.bind('settingsChanged', function () {
+  hostAdmin.readConfigFromDisk();
+});
 
 module.exports = hostAdmin;

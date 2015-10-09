@@ -136,42 +136,47 @@ ul.chooseIp li:hover {
   background-color: #ccc;
 }
 
-.editHostModal label {
+.modal label {
   display: block;
   width: 55px;
   float: left;
 }
 
-.editHostModal .host-list {
+.editSettingsModal.modal label {
+  width: auto;
+  float: none;
+}
+
+.modal .host-list {
   float: left;
 }
 
-.editHostModal .host-list span {
+.modal .host-list span {
   float: right;
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.editHostModal .icon {
+.modal .icon {
   vertical-align: bottom;
 }
 
-.editHostModal .icon:hover {
+.modal .icon:hover {
   background-color: #ccc;
 }
 
-.editHostModal ul {
+.modal ul {
   list-style: none;
 }
 
-.editHostModal .operation {
+.modal .operation {
   margin-top: 20px;
   clear: both;
   float: right
 }
 
-.editHostModal .operation button {
+.modal .operation button {
   height: 22px;
   width: 40px;
   line-height: 22px;

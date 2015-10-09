@@ -19,6 +19,7 @@ var Host = require('./js/host');
 var eventCenter = require('./js/eventCenter');
 var editHostService = require('./js/editHostService');
 var hostsFile = require('./js/hostsFile');
+var settings = require('./js/settings');
 
 
 hostAdmin.init();
@@ -53,9 +54,9 @@ var template = [
         type: 'separator'
       },
       {
-        label: '设置白名单',
+        label: '编辑host过滤条件',
         click: function () {
-          ipc.send('flush-browser-cache');
+          settings.edit();
         }
       }
     ]
