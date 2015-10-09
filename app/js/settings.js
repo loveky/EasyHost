@@ -79,6 +79,7 @@ function edit () {
   });
 
   $el.show();
+  $('.modal-backdrop').show();
 }
 
 exports.get = get;
