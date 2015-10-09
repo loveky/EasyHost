@@ -48,6 +48,15 @@ var template = [
         click: function () {
           ipc.send('flush-browser-cache');
         }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: '设置白名单',
+        click: function () {
+          ipc.send('flush-browser-cache');
+        }
       }
     ]
   },

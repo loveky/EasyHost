@@ -7,6 +7,7 @@ var $ = require('../lib/jquery-2.1.4.min');
 var hostsFile = require('./hostsFile');
 var editHostService = require('./editHostService');
 var Host = require('./host');
+var settings = require('./settings');
 
 function showContextMenu (host) {
   var getCopyCurrentConfigHandler = function (host) {
@@ -41,6 +42,8 @@ function showContextMenu (host) {
 
 var hostAdmin = {
   $container: $('#host-group'),
+  bypassList: [],
+  bypassRegexps: [],
   hosts: {},
   addHost: function (host) {
     this.hosts[host.name] = new Host(host, this.$container);
@@ -58,6 +61,7 @@ var hostAdmin = {
   },
   init: function () {
     var self = this;
+
     this.$container.delegate('.host', 'click', function () {
       self.hosts[$(this).data('name')].toggleEnableState();
     });
@@ -107,6 +111,15 @@ var hostAdmin = {
       text.push(host.toText());
     });
 
+    if (this.bypassList.length > 0) {    
+      text.push('###############################################\r\n'
+              + '#         以下host目前被EasyHost忽略\r\n'
+              + '# 如需在EasyHost显示以下host，请编辑bypass列表\r\n'
+              + '###############################################\r\n');
+
+      text.push(this.bypassList.join('\r\n'));
+    }
+
     return text.join('\r\n\r\n');
   },
   readConfigFromDisk: function () {
@@ -114,15 +127,38 @@ var hostAdmin = {
     var hostFileContent = hostsFile.readFromDisk();
     var lines = hostFileContent.split('\n');
     var config = {};
+    var bypassRegexps = settings.get('bypassRegexps', []);
+
+    self.bypassRegexps = [];
+
+    bypassRegexps.forEach(function (regexpString) {
+      self.bypassRegexps.push(new RegExp(regexpString, "i"));
+    });
 
     lines.forEach(function (line) {
       var result = line.match(regexp);
+      var bypass = false;
 
       if (result != null) {
         var name = result[3];
         var note = $.trim(result[5] || '');
         var ip = result[2];
         var enabled = result[1].length === 0;
+
+        // 检查是否匹配bypass条件
+        self.bypassRegexps.forEach(function (bypassRegexp) {
+          if (name.match(bypassRegexp)) {
+            bypass = true;
+          }
+        });
+
+        // 如果匹配bypass条件则不在管理界面出现
+        if (bypass) {
+          self.bypassList.push(line);
+          return;
+        }
+
+        // 否则添加到管理面板
         if (!config.hasOwnProperty(result[3])) {
           config[name] = {
             name: name,
