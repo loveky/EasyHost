@@ -36,6 +36,10 @@ var template = [
         click: function() { hostsFile.open(); }
       },
       {
+        label: '重新载入host信息',
+        click: function() { hostAdmin.readConfigFromDisk(); }
+      },
+      {
         type: 'separator'
       },
       {
