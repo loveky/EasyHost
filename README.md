@@ -1,6 +1,8 @@
 # EasyHost
 一个帮你轻松管理hosts文件的小工具。基于[Electron](http://electron.atom.io/)构建。
 
+![Demo](https://cloud.githubusercontent.com/assets/1198651/10447871/d69c2b26-71ba-11e5-9e33-24804d524755.gif)
+
 ### 开始使用
 [点此](http://pan.baidu.com/s/1dDkA7Pv)下载安装程序，与往日管理hosts文件的痛苦经历说再见。
 
