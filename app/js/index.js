@@ -104,6 +104,13 @@ $('#new-host').bind('click', function () {
   });
 });
 
+$('#toggle-disabled').bind('click', function () {
+  var $this = $(this);
+
+  $this.text() == '隐藏禁用' ? $this.text('显示禁用') : $this.text('隐藏禁用');
+  hostAdmin.toggleDisabled();
+});
+
 // 粘贴文本时更新配置
 $(document).on('paste', function (event) {
   if ($(event.target).is('input')) {

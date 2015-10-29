@@ -46,6 +46,7 @@ var hostAdmin = {
   bypassList: [],
   bypassRegexps: [],
   hosts: {},
+  showingDisabledHost: true,
   addHost: function (host) {
     this.hosts[host.name] = new Host(host, this.$container);
   },
@@ -95,15 +96,32 @@ var hostAdmin = {
     });
   },
   filter: function (keyword) {
-    var self = this;
-    Object.keys(this.hosts).forEach(function (name) {
-      if (name.indexOf(keyword) !== -1) {
-        self.hosts[name].show();
-        self.hosts[name].highlightName(keyword);
+    this.forEachHost(function (host) {
+      if (host.name.indexOf(keyword) !== -1) {
+        host.show();
+        host.highlightName(keyword);
       }
       else {
-        self.hosts[name].hide();
+        host.hide();
+      }      
+    });
+  },
+  toggleDisabled: function () {
+    this.showingDisabledHost = !this.showingDisabledHost;
+
+    this.forEachHost(function (host) {
+      if (!this.showingDisabledHost && !host.enabled) {
+        host.hide();
       }
+      else {
+        host.show();
+      }
+    }.bind(this));
+  },
+  forEachHost: function (callback) {
+    var self = this;
+    Object.keys(this.hosts).forEach(function (name) {
+      callback(self.hosts[name]);
     });
   },
   toText: function () {
